@@ -3,7 +3,8 @@
     'version': '1.0',
     'depends': ['stock', 'product'],
     'data': [
-        'views/report_action_view.xml',
-        'report/product_label_template.xml',
+        'report/report_product_label_template_extend.xml',
     ],
+    'installable': True,
+    'application': False,
 }

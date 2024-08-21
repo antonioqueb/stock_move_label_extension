@@ -1,7 +1,7 @@
 <odoo>
     <template id="report_producttemplatelabel_dymo" inherit_id="product.report_producttemplatelabel_dymo">
         <xpath expr="//div[@class='page']" position="inside">
-            <t t-foreach="doc.stock_move_ids" t-as="move">
+            <t t-foreach="o.move_ids" t-as="move">
                 <div>
                     <strong>Gramaje:</strong> <span t-esc="move.gramaje"/>
                 </div>

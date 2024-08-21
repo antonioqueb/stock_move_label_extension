@@ -1,0 +1,23 @@
+<odoo>
+    <template id="report_producttemplatelabel_dymo" inherit_id="product.report_producttemplatelabel_dymo">
+        <xpath expr="//div[@class='page']" position="inside">
+            <t t-foreach="doc.stock_move_ids" t-as="move">
+                <div>
+                    <strong>Gramaje:</strong> <span t-esc="move.gramaje"/>
+                </div>
+                <div>
+                    <strong>Ancho:</strong> <span t-esc="move.ancho"/>
+                </div>
+                <div>
+                    <strong>Tipo:</strong> <span t-esc="move.tipo"/>
+                </div>
+                <div>
+                    <strong>Kilos:</strong> <span t-esc="move.kilos"/>
+                </div>
+                <div>
+                    <strong>Planta:</strong> <span t-esc="move.planta"/>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>

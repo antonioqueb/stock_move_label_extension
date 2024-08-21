@@ -3,9 +3,9 @@
     'version': '1.0',
     'depends': ['stock', 'product'],
     'data': [
-        'security/ir.model.access.csv',  # Agrega el archivo de seguridad aquí
-        'report/report_product_label_template_letter.xml',
-        'report/report_action.xml',
+        'security/ir.model.access.csv',  # Permisos de seguridad
+        'report/report_product_label_template_letter.xml',  # Plantilla del reporte
+        'report/report_action.xml',  # Acción del reporte
         'views/custom_product_label_layout_view.xml',
         'views/custom_product_label_action.xml',
         'views/stock_picking_action_print_label.xml',

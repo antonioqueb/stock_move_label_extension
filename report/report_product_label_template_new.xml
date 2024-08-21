@@ -1,0 +1,28 @@
+<odoo>
+    <template id="report_product_label_new">
+        <!-- Define la nueva plantilla para el reporte -->
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <t t-foreach="doc.move_lines" t-as="move">
+                        <div>
+                            <strong>Gramaje:</strong> <span t-esc="move.gramaje"/>
+                        </div>
+                        <div>
+                            <strong>Ancho:</strong> <span t-esc="move.ancho"/>
+                        </div>
+                        <div>
+                            <strong>Tipo:</strong> <span t-esc="move.tipo"/>
+                        </div>
+                        <div>
+                            <strong>Kilos:</strong> <span t-esc="move.kilos"/>
+                        </div>
+                        <div>
+                            <strong>Planta:</strong> <span t-esc="move.planta"/>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

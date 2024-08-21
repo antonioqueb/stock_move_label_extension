@@ -1,0 +1,12 @@
+<odoo>
+    <!-- Acción para el reporte -->
+    <report
+        id="action_report_product_label_new"
+        model="stock.move"
+        string="Nuevo Reporte de Etiquetas"
+        report_type="qweb-pdf"
+        name="module_name.report_product_label_new"
+        file="module_name.report_product_label_new"
+        print_report_name="'Etiquetas - %s' % (object.display_name)"
+    />
+</odoo>

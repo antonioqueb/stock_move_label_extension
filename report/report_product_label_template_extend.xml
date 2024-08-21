@@ -1,25 +1,15 @@
 <odoo>
-    <!-- Heredamos la plantilla del reporte original -->
-    <template id="report_producttemplatelabel_dymo_extend" inherit_id="product.report_producttemplatelabel_dymo">
-        <!-- Utiliza xpath para ubicar dónde quieres agregar los nuevos campos -->
-        <xpath expr="//div[@class='page']" position="inside">
-            <t t-foreach="doc.move_lines" t-as="move">
-                <div>
-                    <strong>Gramaje:</strong> <span t-esc="move.gramaje"/>
-                </div>
-                <div>
-                    <strong>Ancho:</strong> <span t-esc="move.ancho"/>
-                </div>
-                <div>
-                    <strong>Tipo:</strong> <span t-esc="move.tipo"/>
-                </div>
-                <div>
-                    <strong>Kilos:</strong> <span t-esc="move.kilos"/>
-                </div>
-                <div>
-                    <strong>Planta:</strong> <span t-esc="move.planta"/>
-                </div>
-            </t>
-        </xpath>
-    </template>
+    <record id="view_product_label_layout_form_extend" model="ir.ui.view">
+        <field name="name">product.label.layout.form.extend</field>
+        <field name="model">product.label.layout.form</field>
+        <field name="inherit_id" ref="stock.product_label_layout_form"/>
+        <field name="arch" type="xml">
+            <!-- Agrega una nueva opción al radio de selección -->
+            <xpath expr="//field[@name='print_format']" position="inside">
+                <field name="print_format" widget="radio">
+                    <option name="new_label">Nuevo Reporte de Etiquetas</option>
+                </field>
+            </xpath>
+        </field>
+    </record>
 </odoo>

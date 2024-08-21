@@ -1,0 +1,8 @@
+<odoo>
+    <record id="action_custom_product_label_layout" model="ir.actions.act_window">
+        <field name="name">Imprimir Etiquetas</field>
+        <field name="res_model">custom.product.label.layout</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

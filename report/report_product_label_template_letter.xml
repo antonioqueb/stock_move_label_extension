@@ -1,4 +1,5 @@
 <odoo>
+    <!-- Definición de la plantilla del reporte -->
     <template id="report_product_label_letter">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
@@ -29,4 +30,15 @@
             </t>
         </t>
     </template>
+
+    <!-- Definición de la acción del reporte -->
+    <report
+        id="action_report_product_label_letter"
+        model="stock.move"
+        string="Etiquetas en Formato Letter"
+        report_type="qweb-pdf"
+        name="stock_move_label_extension.report_product_label_letter"
+        file="stock_move_label_extension.report_product_label_letter"
+        print_report_name="'Etiquetas - %s' % (object.display_name)"
+    />
 </odoo>

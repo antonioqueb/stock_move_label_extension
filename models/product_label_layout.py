@@ -9,8 +9,9 @@ class CustomProductLabelLayout(models.TransientModel):
     ], string="Formato de Impresión", required=True, default='letter_label')
 
     def process(self):
-        # Asegúrate de que el 'id' del reporte aquí coincida exactamente con el 'id' definido en el XML
         if self.print_format == 'letter_label':
-            return self.env.ref('stock_move_label_extension.action_report_product_label_letter').report_action(self)
+            action = self.env.ref('stock_move_label_extension.action_report_product_label_letter').report_action(self)
+            action['target'] = 'new'  # Abrir el reporte en una nueva pestaña
+            return action
         else:
             return super(CustomProductLabelLayout, self).process()

@@ -16,16 +16,14 @@
         </field>
     </record>
 
-    <!-- Acción del servidor para imprimir etiquetas -->
-    <record id="action_stock_picking_print_labels" model="ir.actions.server">
-        <field name="name">Imprimir Etiquetas</field>
-        <field name="model_id" ref="stock.model_stock_picking"/>
-        <field name="state">code</field>
-        <field name="code">
-            action = env.ref('stock_move_label_extension.action_report_product_label_letter').report_action(self)
-        </field>
+    <!-- Acción para abrir el asistente -->
+    <record id="action_open_label_layout" model="ir.actions.act_window">
+        <field name="name">Formato de Etiquetas</field>
+        <field name="res_model">custom.product.label.layout</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_picking_id': active_id}</field>
     </record>
-
 
     <!-- Vista heredada de stock.picking para incluir botón de impresión de etiquetas -->
     <record id="view_picking_form_inherit_print_label" model="ir.ui.view">
@@ -34,9 +32,8 @@
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
            <header>
-             <button name="action_stock_picking_print_labels" string="Imprimir Etiquetas Personalizadas" type="object" class="oe_highlight"/>
+             <button name="%(action_open_label_layout)d" string="Imprimir Etiquetas Personalizadas" type="action" class="oe_highlight"/>
            </header>
-
         </field>
     </record>
 

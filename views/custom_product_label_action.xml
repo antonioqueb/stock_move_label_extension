@@ -22,7 +22,7 @@
         <field name="model_id" ref="stock.model_stock_picking"/>
         <field name="state">code</field>
         <field name="code">
-            action = env.ref('stock_move_label_extension.action_report_product_label_letter').report_action(record)
+            action = env.ref('stock_move_label_extension.action_report_product_label_letter').report_action(self)
         </field>
     </record>
 
@@ -34,7 +34,7 @@
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
            <header>
-             <button name="%(action_stock_picking_print_labels)d" string="Imprimir Etiquetas Personalizadas" type="action" class="oe_highlight"/>
+             <button name="action_stock_picking_print_labels" string="Imprimir Etiquetas Personalizadas" type="object" class="oe_highlight"/>
            </header>
 
         </field>

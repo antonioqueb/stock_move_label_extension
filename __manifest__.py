@@ -4,8 +4,11 @@
     'depends': ['stock', 'product'],
     'data': [
         'security/ir.model.access.csv',  # Permisos de seguridad
-        'report/report_product_label_template_letter.xml',
+        
         'views/custom_product_label_action.xml',
+   
+        'report/report_product_label_template_letter.xml'
+    
     ],
     'installable': True,
     'application': False,

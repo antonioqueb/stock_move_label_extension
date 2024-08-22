@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 class CustomProductLabelLayout(models.TransientModel):
     _name = 'custom.product.label.layout'
@@ -9,9 +9,10 @@ class CustomProductLabelLayout(models.TransientModel):
     ], string="Formato de Impresión", required=True, default='letter_label')
 
     def process(self):
-        if self.print_format == 'letter_label':
-            action = self.env.ref('stock_move_label_extension.action_report_product_label_letter').report_action(self)
+        report_xml_id = 'stock_move_label_extension.action_report_product_label_letter'
+        if self.env['ir.model.data'].sudo().search([('model', '=', 'ir.actions.report'), ('module', '=', 'stock_move_label_extension'), ('name', '=', report_xml_id)]):
+            action = self.env.ref(report_xml_id).report_action(self)
             action['target'] = 'new'  # Abrir el reporte en una nueva pestaña
             return action
         else:
-            return super(CustomProductLabelLayout, self).process()
+            return {'type': 'ir.actions.act_window_close'}

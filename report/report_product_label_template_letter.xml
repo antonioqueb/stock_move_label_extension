@@ -34,7 +34,7 @@
 
    <!-- Definición de la acción del reporte -->
     <report
-        id="action_report_product_label_letter"  # Este 'id' es utilizado en el método 'process'
+        id="action_report_product_label_letter"
         model="stock.move"
         string="Etiquetas en Formato Letter"
         report_type="qweb-pdf"

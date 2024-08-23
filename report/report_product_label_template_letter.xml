@@ -1,5 +1,5 @@
 <odoo>
-    <data>
+    
         <!-- Definición de la plantilla de reporte -->
         <template id="report_product_label_letter">
             <t t-call="web.html_container">
@@ -31,5 +31,5 @@
             print_report_name="'Etiquetas - %s' % (object.display_name)"
             target="current"
         />
-    </data>
+   
 </odoo>

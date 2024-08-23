@@ -1,68 +1,66 @@
 <odoo>
-    <data>
-        <!-- Templates y Reportes -->
-        <template id="report_product_label_letter">
-            <t t-call="web.html_container">
-                <t t-foreach="docs" t-as="doc">
-                    <div class="page" style="page-break-after: always;">
-                        <t t-foreach="doc.move_lines" t-as="move">
-                            <div class="label" style="border: 1px solid black; width: 3.5in; height: 2in; padding: 10px; margin: 10px; float: left;">
-                                <div><strong>Producto:</strong> <span t-esc="move.product_id.display_name"/></div>
-                                <div><strong>Gramaje:</strong> <span t-esc="move.gramaje"/></div>
-                                <div><strong>Ancho:</strong> <span t-esc="move.ancho"/></div>
-                                <div><strong>Tipo:</strong> <span t-esc="move.tipo"/></div>
-                                <div><strong>Kilos:</strong> <span t-esc="move.kilos"/></div>
-                                <div><strong>Planta:</strong> <span t-esc="move.planta"/></div>
-                            </div>
-                        </t>
-                    </div>
-                </t>
+    <!-- Templates y Reportes -->
+    <template id="report_product_label_letter" inherit_id="web.external_layout">
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page" style="page-break-after: always;">
+                    <t t-foreach="doc.move_lines" t-as="move">
+                        <div class="label" style="border: 1px solid black; width: 3.5in; height: 2in; padding: 10px; margin: 10px; float: left;">
+                            <div><strong>Producto:</strong> <span t-esc="move.product_id.display_name"/></div>
+                            <div><strong>Gramaje:</strong> <span t-esc="move.gramaje"/></div>
+                            <div><strong>Ancho:</strong> <span t-esc="move.ancho"/></div>
+                            <div><strong>Tipo:</strong> <span t-esc="move.tipo"/></div>
+                            <div><strong>Kilos:</strong> <span t-esc="move.kilos"/></div>
+                            <div><strong>Planta:</strong> <span t-esc="move.planta"/></div>
+                        </div>
+                    </t>
+                </div>
             </t>
-        </template>
+        </xpath>
+    </template>
 
-        <report
-            id="action_report_product_label_letter"
-            model="stock.move"
-            string="Etiquetas en Formato Letter"
-            report_type="qweb-pdf"
-            name="stock_move_label_extension.report_product_label_letter"
-            file="stock_move_label_extension.report_product_label_letter"
-            print_report_name="'Etiquetas - %s' % (object.display_name)"
-            target="current"
-        />
+    <report
+        id="action_report_product_label_letter"
+        model="stock.move"
+        string="Etiquetas en Formato Letter"
+        report_type="qweb-pdf"
+        name="stock_move_label_extension.report_product_label_letter"
+        file="stock_move_label_extension.report_product_label_letter"
+        print_report_name="'Etiquetas - %s' % (object.display_name)"
+        target="current"
+    />
 
-        <!-- Vistas y Acciones -->
-        <record id="view_custom_product_label_layout_form" model="ir.ui.view">
-            <field name="name">custom.product.label.layout.form</field>
-            <field name="model">custom.product.label.layout</field>
-            <field name="arch" type="xml">
-                <form>
-                    <group><field name="print_format" widget="radio"/></group>
-                    <footer>
-                        <button name="process" string="Confirmar" type="object" class="btn-primary"/>
-                        <button string="Cancelar" class="btn-secondary" special="cancel"/>
-                    </footer>
-                </form>
-            </field>
-        </record>
+    <!-- Vistas y Acciones -->
+    <record id="view_custom_product_label_layout_form" model="ir.ui.view">
+        <field name="name">custom.product.label.layout.form</field>
+        <field name="model">custom.product.label.layout</field>
+        <field name="arch" type="xml">
+            <form>
+                <group><field name="print_format" widget="radio"/></group>
+                <footer>
+                    <button name="process" string="Confirmar" type="object" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
 
-        <record id="action_open_label_layout" model="ir.actions.act_window">
-            <field name="name">Formato de Etiquetas</field>
-            <field name="res_model">custom.product.label.layout</field>
-            <field name="view_mode">form</field>
-            <field name="target">new</field>
-            <field name="context">{'default_picking_id': active_id}</field>
-        </record>
+    <record id="action_open_label_layout" model="ir.actions.act_window">
+        <field name="name">Formato de Etiquetas</field>
+        <field name="res_model">custom.product.label.layout</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_picking_id': active_id}</field>
+    </record>
 
-        <record id="view_picking_form_inherit_print_label" model="ir.ui.view">
-            <field name="name">stock.picking.form.print.label</field>
-            <field name="model">stock.picking</field>
-            <field name="inherit_id" ref="stock.view_picking_form"/>
-            <field name="arch" type="xml">
-                <header>
-                    <button name="%(action_open_label_layout)d" string="Imprimir Etiquetas Personalizadas" type="action" class="oe_highlight"/>
-                </header>
-            </field>
-        </record>
-    </data>
+    <record id="view_picking_form_inherit_print_label" model="ir.ui.view">
+        <field name="name">stock.picking.form.print.label</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <header>
+                <button name="%(action_open_label_layout)d" string="Imprimir Etiquetas Personalizadas" type="action" class="oe_highlight"/>
+            </header>
+        </field>
+    </record>
 </odoo>

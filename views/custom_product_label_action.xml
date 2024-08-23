@@ -1,36 +1,4 @@
 <odoo>
-    <!-- Definición del template de reporte -->
-    <template id="report_product_label_letter">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="doc">
-                <div class="page" style="page-break-after: always;">
-                    <t t-foreach="doc.move_lines" t-as="move">
-                        <div class="label" style="border: 1px solid black; width: 3.5in; height: 2in; padding: 10px; margin: 10px; float: left;">
-                            <div><strong>Producto:</strong> <span t-esc="move.product_id.display_name"/></div>
-                            <div><strong>Gramaje:</strong> <span t-esc="move.gramaje"/></div>
-                            <div><strong>Ancho:</strong> <span t-esc="move.ancho"/></div>
-                            <div><strong>Tipo:</strong> <span t-esc="move.tipo"/></div>
-                            <div><strong>Kilos:</strong> <span t-esc="move.kilos"/></div>
-                            <div><strong>Planta:</strong> <span t-esc="move.planta"/></div>
-                        </div>
-                    </t>
-                </div>
-            </t>
-        </t>
-    </template>
-
-    <!-- Definición del reporte -->
-    <report
-        id="action_report_product_label_letter"
-        model="stock.move"
-        string="Etiquetas en Formato Letter"
-        report_type="qweb-pdf"
-        name="stock_move_label_extension.report_product_label_letter"
-        file="stock_move_label_extension.report_product_label_letter"
-        print_report_name="'Etiquetas - %s' % (object.display_name)"
-        target="current"
-    />
-
     <!-- Definiciones de vistas y acciones -->
     <record id="view_custom_product_label_layout_form" model="ir.ui.view">
         <field name="name">custom.product.label.layout.form</field>

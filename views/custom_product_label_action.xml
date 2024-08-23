@@ -1,5 +1,4 @@
 <odoo>
-    <!-- Definición del formulario para seleccionar formato -->
     <record id="view_custom_product_label_layout_form" model="ir.ui.view">
         <field name="name">custom.product.label.layout.form</field>
         <field name="model">custom.product.label.layout</field>
@@ -16,7 +15,6 @@
         </field>
     </record>
 
-    <!-- Acción para abrir el asistente -->
     <record id="action_open_label_layout" model="ir.actions.act_window">
         <field name="name">Formato de Etiquetas</field>
         <field name="res_model">custom.product.label.layout</field>
@@ -25,7 +23,7 @@
         <field name="context">{'default_picking_id': active_id}</field>
     </record>
 
-    <!-- Vista heredada de stock.picking para incluir botón de impresión de etiquetas -->
+
     <record id="view_picking_form_inherit_print_label" model="ir.ui.view">
         <field name="name">stock.picking.form.print.label</field>
         <field name="model">stock.picking</field>

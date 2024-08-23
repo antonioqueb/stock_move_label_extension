@@ -31,15 +31,17 @@
         </t>
     </template>
 
-    <report
-        id="action_report_product_label_letter"
-        model="stock.move"
-        string="Etiquetas en Formato Letter"
-        report_type="qweb-pdf"
-        name="stock_move_label_extension.report_product_label_letter"
-        file="stock_move_label_extension.report_product_label_letter"
-        print_report_name="'Etiquetas - %s' % (object.display_name)"
-    />
+<report
+    id="action_report_product_label_letter"
+    model="stock.move"
+    string="Etiquetas en Formato Letter"
+    report_type="qweb-pdf"
+    name="stock_move_label_extension.report_product_label_letter"
+    file="stock_move_label_extension.report_product_label_letter"
+    print_report_name="'Etiquetas - %s' % (object.display_name)"
+    target="current" 
+/>
+
 
 
 </odoo>

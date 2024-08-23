@@ -10,9 +10,10 @@ class CustomProductLabelLayout(models.TransientModel):
 
     def process(self):
         report_xml_id = 'stock_move_label_extension.action_report_product_label_letter'
+        # Verifica si el reporte existe
         if self.env['ir.model.data'].sudo().search([('model', '=', 'ir.actions.report'), ('module', '=', 'stock_move_label_extension'), ('name', '=', report_xml_id)]):
             action = self.env.ref(report_xml_id).report_action(self)
-            action['target'] = 'new'  # Abrir el reporte en una nueva pestaña
+            action['target'] = 'current'  # Cargar el reporte en la ventana/pestaña actual
             return action
         else:
             return {'type': 'ir.actions.act_window_close'}

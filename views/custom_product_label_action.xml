@@ -46,5 +46,4 @@
             print_report_name="'Etiquetas - %s' % (object.display_name)"
             target="current"
         />
-    </data>
 </odoo>

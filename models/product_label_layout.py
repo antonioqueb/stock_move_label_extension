@@ -35,16 +35,16 @@ class CustomProductLabelLayout(models.TransientModel):
             # Intentar generar la acción del reporte
             try:
                 _logger.debug('Attempting to call report_action on the report with context: %s', json.dumps(self.env.context))
-                
+
                 # Registrar el contexto actual, para verificar que se pasan correctamente los datos
                 context_copy = self.env.context.copy()
                 _logger.debug('Current context: %s', json.dumps(context_copy))
-                
+
                 # Registrar el ID del usuario actual y la compañía
                 _logger.debug('Current user ID: %s, Company ID: %s', self.env.user.id, self.env.user.company_id.id)
 
                 action = report.report_action(self)
-                
+
                 # Registrar el contenido de la acción generada
                 _logger.debug('Report action result: %s', action)
 

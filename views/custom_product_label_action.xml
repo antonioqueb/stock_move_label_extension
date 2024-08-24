@@ -16,7 +16,7 @@
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
                 <header>
-                   <button name="process" string="Imprimir Etiquetas Personalizadas" type="object" class="oe_highlight"/>
+                    <button name="%(action_open_label_layout)d" string="Imprimir Etiquetas Personalizadas" type="action" class="oe_highlight"/>
                 </header>
             </field>
         </record>

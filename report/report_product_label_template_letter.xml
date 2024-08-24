@@ -1,6 +1,6 @@
-<template id="report_product_label_letter">
-    <t t-call="web.html_container">
-        <t t-foreach="docs" t-as="doc">
+<odoo>
+    <template id="report_product_label_letter">
+        <t t-call="web.html_container">
             <div class="page" style="page-break-after: always;">
                 <div class="label" style="border: 1px solid black; width: 3.5in; height: 2in; padding: 10px; margin: 10px; float: left;">
                     <div><strong>Etiqueta generada con éxito</strong></div>
@@ -8,5 +8,5 @@
                 </div>
             </div>
         </t>
-    </t>
-</template>
+    </template>
+</odoo>

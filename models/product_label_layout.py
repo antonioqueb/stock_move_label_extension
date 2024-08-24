@@ -13,15 +13,15 @@ class CustomProductLabelLayout(models.TransientModel):
     
     def process(self):
         report_xml_id = 'stock_move_label_extension.action_report_product_label_letter'
-        
-        # Verifica si el reporte existe
         _logger.info('Attempting to generate report with ID: %s', report_xml_id)
-        report = self.env.ref(report_xml_id, raise_if_not_found=False)
         
+        report = self.env.ref(report_xml_id, raise_if_not_found=False)
         if report:
             _logger.info('Report found: %s', report_xml_id)
             try:
-                return report.report_action(self)
+                action = report.report_action(self)
+                _logger.info('Report action successfully generated.')
+                return action
             except Exception as e:
                 _logger.error('Error generating the report: %s', str(e))
                 return {'type': 'ir.actions.act_window_close'}

@@ -10,12 +10,14 @@ class CustomProductLabelLayout(models.TransientModel):
     print_format = fields.Selection([
         ('letter_label', 'Etiqueta en Formato Letter'),
     ], string="Formato de Impresión", required=True, default='letter_label')
-    
+
     def process(self):
+        _logger.info('Process method called in CustomProductLabelLayout')
         report_xml_id = 'stock_move_label_extension.action_report_product_label_letter'
-        _logger.info('Attempting to generate report with ID: %s', report_xml_id)
         
+        _logger.info('Attempting to generate report with ID: %s', report_xml_id)
         report = self.env.ref(report_xml_id, raise_if_not_found=False)
+        
         if report:
             _logger.info('Report found: %s', report_xml_id)
             try:

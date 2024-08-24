@@ -43,18 +43,27 @@ class CustomProductLabelLayout(models.TransientModel):
                 # Registrar el ID del usuario actual y la compañía
                 _logger.debug('Current user ID: %s, Company ID: %s', self.env.user.id, self.env.user.company_id.id)
 
+                # Generar el reporte
                 action = report.report_action(self)
 
                 # Registrar el contenido de la acción generada
                 _logger.debug('Report action result: %s', action)
 
-                # Verificar los datos devueltos por report_action
+                # Verificar si se generó la acción del reporte
                 if action:
                     _logger.info('Report action generated successfully for record ID: %s', self.id)
+
+                    # Verificar wkhtmltopdf para generar el PDF
+                    check_wkhtmltopdf = self.env['ir.actions.report']._check_wkhtmltopdf()
+                    if check_wkhtmltopdf:
+                        _logger.info('wkhtmltopdf is available for PDF generation')
+                        return action
+                    else:
+                        _logger.error('wkhtmltopdf is not available. Report generation failed.')
+                        return {'type': 'ir.actions.act_window_close'}
                 else:
                     _logger.warning('Report action returned None for record ID: %s', self.id)
-
-                return action
+                    return {'type': 'ir.actions.act_window_close'}
             except Exception as e:
                 _logger.error('Error generating the report action for record ID: %s. Exception: %s', self.id, str(e))
 

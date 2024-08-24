@@ -1,6 +1,5 @@
 from odoo import models, fields, api, _
 import logging
-import json
 
 _logger = logging.getLogger(__name__)
 
@@ -32,45 +31,36 @@ class CustomProductLabelLayout(models.TransientModel):
         if report:
             _logger.info('Report found: %s', report_xml_id)
 
-            # Intentar generar la acción del reporte
+            # Intentar generar la acción del reporte con los datos correctos
             try:
-                _logger.debug('Attempting to call report_action on the report with context: %s', json.dumps(self.env.context))
+                # Asegúrate de que pasas el registro correcto para el reporte
+                stock_picking_id = self.env.context.get('active_id')
+                if not stock_picking_id:
+                    _logger.error('No stock picking ID found in context.')
+                    return {'type': 'ir.actions.act_window_close'}
 
-                # Registrar el contexto actual, para verificar que se pasan correctamente los datos
-                context_copy = self.env.context.copy()
-                _logger.debug('Current context: %s', json.dumps(context_copy))
+                stock_picking = self.env['stock.picking'].browse(stock_picking_id)
+                if not stock_picking.exists():
+                    _logger.error('No valid stock picking record found for ID: %s', stock_picking_id)
+                    return {'type': 'ir.actions.act_window_close'}
 
-                # Registrar el ID del usuario actual y la compañía
-                _logger.debug('Current user ID: %s, Company ID: %s', self.env.user.id, self.env.user.company_id.id)
+                _logger.info('Generating report for Stock Picking ID: %s', stock_picking_id)
 
-                # Generar el reporte
-                action = report.report_action(self)
+                # Llamar a report_action con los datos correctos
+                action = report.report_action(stock_picking)
 
-                # Registrar el contenido de la acción generada
+                # Verificar el contenido de la acción generada
                 _logger.debug('Report action result: %s', action)
 
-                # Verificar si se generó la acción del reporte
+                # Verificar si la acción del reporte fue generada exitosamente
                 if action:
-                    _logger.info('Report action generated successfully for record ID: %s', self.id)
-
-                    # Verificar wkhtmltopdf para generar el PDF
-                    check_wkhtmltopdf = self.env['ir.actions.report']._check_wkhtmltopdf()
-                    if check_wkhtmltopdf:
-                        _logger.info('wkhtmltopdf is available for PDF generation')
-                        return action
-                    else:
-                        _logger.error('wkhtmltopdf is not available. Report generation failed.')
-                        return {'type': 'ir.actions.act_window_close'}
+                    _logger.info('Report action generated successfully for Stock Picking ID: %s', stock_picking_id)
+                    return action
                 else:
-                    _logger.warning('Report action returned None for record ID: %s', self.id)
+                    _logger.warning('Report action returned None for Stock Picking ID: %s', stock_picking_id)
                     return {'type': 'ir.actions.act_window_close'}
             except Exception as e:
-                _logger.error('Error generating the report action for record ID: %s. Exception: %s', self.id, str(e))
-
-                # Registrar información de depuración adicional del entorno y contexto
-                _logger.debug('Exception context: %s', json.dumps(self.env.context))
-                _logger.debug('Exception user ID: %s, Company ID: %s', self.env.user.id, self.env.user.company_id.id)
-
+                _logger.error('Error generating the report action for Stock Picking ID: %s. Exception: %s', stock_picking_id, str(e))
                 return {'type': 'ir.actions.act_window_close'}
         else:
             _logger.warning('Report not found for XML ID: %s, Process aborted for record ID: %s', report_xml_id, self.id)

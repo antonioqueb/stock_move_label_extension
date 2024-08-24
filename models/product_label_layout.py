@@ -7,13 +7,12 @@ class CustomProductLabelLayout(models.TransientModel):
     print_format = fields.Selection([
         ('letter_label', 'Etiqueta en Formato Letter'),
     ], string="Formato de Impresión", required=True, default='letter_label')
-
+    
     def process(self):
         report_xml_id = 'stock_move_label_extension.action_report_product_label_letter'
         # Verifica si el reporte existe
-        if self.env['ir.model.data'].sudo().search([('model', '=', 'ir.actions.report'), ('module', '=', 'stock_move_label_extension'), ('name', '=', report_xml_id)]):
-            action = self.env.ref(report_xml_id).report_action(self)
-            action['target'] = 'current'  # Cargar el reporte en la ventana/pestaña actual
-            return action
+        report = self.env.ref(report_xml_id, raise_if_not_found=False)
+        if report:
+            return report.report_action(self)
         else:
             return {'type': 'ir.actions.act_window_close'}

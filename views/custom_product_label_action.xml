@@ -1,6 +1,6 @@
 <odoo>
     <data>
-        <!-- Acción para abrir el formulario de impresión -->
+        <!-- Acción para abrir el formulario de impresión de etiquetas personalizadas -->
         <record id="action_open_label_layout" model="ir.actions.act_window">
             <field name="name">Etiqueta Personalizada</field>
             <field name="res_model">custom.product.label.layout</field>
@@ -9,7 +9,7 @@
             <field name="context">{'default_print_format': 'letter_label'}</field>
         </record>
 
-        <!-- Acción para abrir el formulario de previsualización -->
+        <!-- Acción para abrir el formulario de previsualización de etiquetas personalizadas -->
         <record id="action_preview_label_layout" model="ir.actions.act_window">
             <field name="name">Previsualizar Etiquetas Personalizadas</field>
             <field name="res_model">custom.product.label.layout</field>

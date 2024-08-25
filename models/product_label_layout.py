@@ -16,14 +16,14 @@ class CustomProductLabelLayout(models.TransientModel):
 
         # Definir el ID del informe
         report_xml_id = 'stock_move_label_extension.action_report_product_label_letter'
-        
+
         try:
             # Intentar obtener la referencia del informe
             report = self.env.ref(report_xml_id, raise_if_not_found=False)
         except Exception as e:
             _logger.error('Error finding report with XML ID: %s. Exception: %s', report_xml_id, str(e))
             return {'type': 'ir.actions.act_window_close'}
-        
+
         if report:
             # Obtener el ID de stock.picking desde el contexto
             stock_picking_id = self.env.context.get('active_id')

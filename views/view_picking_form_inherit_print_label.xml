@@ -8,14 +8,14 @@
             <field name="arch" type="xml">
                 <header>
                     <!-- Botón existente para imprimir etiquetas -->
-                    <button name="action_open_label_layout"
+                    <button name="%(action_open_label_layout)d"
                             string="Imprimir Etiquetas Personalizadas"
                             type="action"
                             class="oe_highlight"
                             context="{'default_print_format': 'letter_label'}"/>
 
                     <!-- Nuevo botón para previsualizar etiquetas -->
-                    <button name="action_preview_label_layout"
+                    <button name="%(action_preview_label_layout)d"
                             string="Previsualizar Etiquetas Personalizadas"
                             type="action"
                             class="oe_highlight"

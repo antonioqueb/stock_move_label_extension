@@ -38,19 +38,23 @@ class CustomProductLabelLayout(models.TransientModel):
                 return {'type': 'ir.actions.act_window_close'}
 
             # Verificar si se está en modo de previsualización
-            if self.env.context.get('preview_mode'):
+            preview_mode = self.env.context.get('preview_mode', False)
+            if preview_mode:
                 # Generar el informe en formato adecuado para previsualización (sin descargar)
+                _logger.info('Generating report in preview mode for Stock Picking ID: %s', stock_picking_id)
                 action = report.report_action(stock_picking, config=False)
             else:
                 # Generar el informe en formato PDF
+                _logger.info('Generating report for Stock Picking ID: %s', stock_picking_id)
                 action = report.report_action(stock_picking)
 
-            # Verificar si se ha generado la acción
+            # Verificar si se ha generado la acción correctamente
             if action:
+                _logger.info('Report action successfully generated for Stock Picking ID: %s', stock_picking_id)
                 return action
             else:
                 _logger.error('Failed to generate report action for Stock Picking ID: %s', stock_picking_id)
                 return {'type': 'ir.actions.act_window_close'}
         else:
-            _logger.error('Report not found.')
+            _logger.error('Report not found for XML ID: %s', report_xml_id)
             return {'type': 'ir.actions.act_window_close'}

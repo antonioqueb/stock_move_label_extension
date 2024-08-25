@@ -33,7 +33,15 @@ class CustomProductLabelLayout(models.TransientModel):
                 return {'type': 'ir.actions.act_window_close'}
 
             _logger.info('Generating report for Stock Picking ID: %s', stock_picking_id)
-            action = report.report_action(stock_picking)
+
+            # Revisar si el contexto tiene el modo de previsualización
+            if self.env.context.get('preview_mode'):
+                # Generar el reporte en un formato adecuado para previsualización
+                action = report.report_action(stock_picking, config=False)
+            else:
+                # Generar el reporte en formato PDF
+                action = report.report_action(stock_picking)
+
             if action:
                 return action
             else:

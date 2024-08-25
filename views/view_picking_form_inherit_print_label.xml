@@ -6,7 +6,18 @@
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
                 <header>
-                    <button name="%(action_open_label_layout)d" string="Imprimir Etiquetas Personalizadas" type="action" class="oe_highlight"/>
+                    <!-- Botón existente para imprimir -->
+                    <button name="%(action_open_label_layout)d" 
+                            string="Imprimir Etiquetas Personalizadas" 
+                            type="action" 
+                            class="oe_highlight" 
+                            context="{'default_print_format': 'letter_label'}"/>
+                    <!-- Nuevo botón para previsualización -->
+                    <button name="%(action_preview_label_layout)d"
+                            string="Previsualizar Etiquetas Personalizadas" 
+                            type="action" 
+                            class="oe_highlight"
+                            context="{'default_print_format': 'letter_label', 'preview_mode': True}"/>
                 </header>
             </field>
         </record>

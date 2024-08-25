@@ -13,7 +13,7 @@
 
         <record id="action_report_product_label_letter" model="ir.actions.report">
             <field name="name">Etiquetas Personalizadas</field>
-            <field name="model">stock.move</field>
+            <field name="model">stock.picking</field>
             <field name="report_type">qweb-pdf</field>
             <field name="report_name">stock_move_label_extension.report_product_label_letter</field>
             <field name="print_report_name">'Etiquetas - %s' % (object.display_name)</field>

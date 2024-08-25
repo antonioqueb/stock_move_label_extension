@@ -1,11 +1,10 @@
 <odoo>
     <data>
         <record id="action_open_label_layout" model="ir.actions.act_window">
-            <field name="name">Formato de Etiquetas</field>
+            <field name="name">Etiqueta Personalizada</field>
             <field name="res_model">custom.product.label.layout</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
-            <field name="context">{'default_picking_id': active_id}</field>
         </record>
     </data>
 </odoo>
